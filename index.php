@@ -1,15 +1,16 @@
 <?php
+include "action.php";
 include "db.php";
 include "header.php";
-include "action.php";
 
 $autorized = false;
+
 if (isset($_POST["go"])) {
     $login = $_POST["login"];
     $password = $_POST["pass"];
     echo check_role($login, $password) . "<br>";
     if (check_autorize($login, $password)) {
-        $autorized = true;
+        $autorized = $_SESSION['authorized'] ;
         echo "Hello, $login";
         if (check_admin($login, $password)) {
             echo "<a href='hello.php?login=$login'>Просмотр отчета</a>";
@@ -19,16 +20,19 @@ if (isset($_POST["go"])) {
         echo "You are not registered";
     }
 }
-$user_form = '<form action="' . $_SERVER['PHP_SELF'] . '" method="post" name="autoForm">
+$user_form = '<form action="' . $_SERVER['PHP_SELF'] . '" method="post" name="autoForm" class="login-form">
 <input type="text" name="login" placeholder="Input login">
 <input type="password" name="pass" placeholder="Input password">
 <input type="submit" value="Go" name="go">
 </form>';
-
-if (!$autorized) {
+echo '<div class="container">';
+if (!isset($_SESSION['authorized'])) {
     echo $user_form;
 }
-
+else {
+    echo '<br><a href="logout.php" class="logout">logout</a>';
+}
+echo "</div>"
 ?>
 <div class="container">
     <div class="row">

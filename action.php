@@ -1,9 +1,12 @@
 <?php
+session_start();
+// $_SESSION['test']='Hello world!';
 include "db.php";
 function check_autorize($log, $pass)
 {
     //global $users;
     $users = get_users();
+    $_SESSION['authorized'] = 1;
     return array_key_exists($log, $users) && $pass == $users[$log]['pass'];
 }
 
