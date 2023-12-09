@@ -16,8 +16,6 @@ input {
   padding: 0px 15px 0px 45px;
 }
 
-.container .login-form,
-.container a.logout {
-  display: block;
+.container.authorized {
   margin-top: 100px;
 }

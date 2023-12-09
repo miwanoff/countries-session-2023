@@ -13,23 +13,31 @@ if (isset($_POST["go"])) {
         $autorized = $_SESSION['authorized'] ;
         echo "Hello, $login";
         if (check_admin($login, $password)) {
-            echo "<a href='hello.php?login=$login'>Просмотр отчета</a>";
+            echo "<a href='hello.php?login=$login'>Report</a>";
         }
 
     } else {
         echo "You are not registered";
     }
 }
+
+
+
+
 $user_form = '<form action="' . $_SERVER['PHP_SELF'] . '" method="post" name="autoForm" class="login-form">
 <input type="text" name="login" placeholder="Input login">
 <input type="password" name="pass" placeholder="Input password">
 <input type="submit" value="Go" name="go">
 </form>';
-echo '<div class="container">';
+echo '<div class="container authorized">';
 if (!isset($_SESSION['authorized'])) {
     echo $user_form;
 }
 else {
+    if (isset($_SESSION['authorized'])) {
+        echo "<p>Hello,". $_SESSION['login']."</p>";
+        echo "<a href='hello.php?login=".$_SESSION['login']."'>Report</a>";
+    }
     echo '<br><a href="logout.php" class="logout">logout</a>';
 }
 echo "</div>"

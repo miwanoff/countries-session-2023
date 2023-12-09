@@ -8,6 +8,7 @@ function check_autorize($log, $pass)
     $users = get_users();
     if (array_key_exists($log, $users) && $pass == $users[$log]['pass']) {
         $_SESSION['authorized'] = 1;
+        $_SESSION['login'] = $log;
         return true;
     }
     return false;
