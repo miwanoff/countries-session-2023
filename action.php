@@ -41,6 +41,7 @@ function add_user($login, $password)
         return false;
     } else {
         $users[$login] = ["pass" => $password, 'role' => 'user'];
+        update_users($users);
         $_SESSION['authorized'] = 1;
         $_SESSION['login'] = $login;
         return true;
@@ -191,7 +192,7 @@ function get_users()
     // return $users;
     $filename = "db.txt";
     $file = fopen($filename, "r");
-    $users = fread($file, filesize($filename) );
+    $users = fread($file, filesize($filename));
     fclose($file);
     return unserialize($users);
 }

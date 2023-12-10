@@ -14,7 +14,7 @@ echo "<h2>Sign up</h2>";
 if (!isset($_SESSION['authorized'])) {
     echo $user_form;
 } else {
-    echo "<p>" . "You are registered" . "</p>";
+    echo "<p>" . "You are registered as " . $_SESSION['login'] . "</p>";
 }
 echo "</div>";
 
@@ -23,7 +23,8 @@ if (isset($_POST["go"])) {
     $password = $_POST["pass"];
 
     if (add_user($login, $password)) {
-        echo "<p>Hello, $login </p>";
+        echo "<p>Hello, $login , You are registered</p>";
+    } else {
+        echo "<p>exist!</p>";
     }
-    echo "<p>exist!</p>";
 }
