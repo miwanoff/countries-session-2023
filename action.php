@@ -28,18 +28,19 @@ function check_role($log, $pass)
     return check_autorize($log, $pass) ? $users[$log]['role'] : false;
 }
 
-function check_log($log){
+function check_log($log)
+{
     $users = get_users();
     return array_key_exists($log, $users);
 }
 
-function add_user($login, $password) {
+function add_user($login, $password)
+{
     $users = get_users();
-    if (check_log(login)) {
+    if (check_log($login)) {
         return false;
-    }
-    else {
-        $users[$login] = $password;
+    } else {
+        $users[$login] = ["pass" => $password, 'role' => 'user'];
         $_SESSION['authorized'] = 1;
         $_SESSION['login'] = $login;
         return true;
@@ -169,6 +170,20 @@ function out_search($data)
     }
     return out_arr_search(array_unique($arr_index));
 }
+
+function update_users($users)
+{
+    $su = serialize($users);
+    $file = fopen("db.txt", "w");
+    if (fwrite($file, $su)) {
+        fclose($file);
+        return true;
+    }
+    fclose($file);
+    return false;
+}
+
+//update_users($users);
 
 function get_users()
 {
