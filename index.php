@@ -17,7 +17,7 @@ if (isset($_POST["go"])) {
         }
 
     } else {
-        echo "You are not registered";
+        echo "<p>You are not registered</p>";
     }
 }
 
