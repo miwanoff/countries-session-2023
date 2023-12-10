@@ -21,11 +21,13 @@ if (isset($_POST["go"])) {
     }
 }
 
-$user_form = '<form action="' . $_SERVER['PHP_SELF'] . '" method="post" name="autoForm" class="login-form">
+$user_form = '<form action="' . $_SERVER['PHP_SELF'] . '" method="post" name="autoForm" class="login-form" onsubmit = "return verify(this)">
 <input type="text" name="login" placeholder="Input login" pattern="[A-Za-z]{3,10}" required>
 <input type="password" name="pass" placeholder="Input password" required>
 <input type="submit" value="Go" name="go">
-</form>';
+</form><br>
+<div id="massage"></div>';
+
 echo '<div class="container authorized">';
 if (!isset($_SESSION['authorized'])) {
     echo $user_form;
