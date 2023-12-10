@@ -10,7 +10,7 @@ if (isset($_POST["go"])) {
     $password = $_POST["pass"];
     echo check_role($login, $password) . "<br>";
     if (check_autorize($login, $password)) {
-        $autorized = $_SESSION['authorized'] ;
+        $autorized = $_SESSION['authorized'];
         echo "Hello, $login";
         if (check_admin($login, $password)) {
             echo "<a href='hello.php?login=$login'>Report</a>";
@@ -21,23 +21,19 @@ if (isset($_POST["go"])) {
     }
 }
 
-
-
-
 $user_form = '<form action="' . $_SERVER['PHP_SELF'] . '" method="post" name="autoForm" class="login-form">
-<input type="text" name="login" placeholder="Input login">
-<input type="password" name="pass" placeholder="Input password">
+<input type="text" name="login" placeholder="Input login" pattern="[A-Za-z]{3,10}" required>
+<input type="password" name="pass" placeholder="Input password" required>
 <input type="submit" value="Go" name="go">
 </form>';
 echo '<div class="container authorized">';
 if (!isset($_SESSION['authorized'])) {
     echo $user_form;
     echo "<a href='registration.php'>Sign up</a>";
-}
-else {
+} else {
     if (isset($_SESSION['authorized'])) {
-        echo "<p>Hello,". $_SESSION['login']."</p>";
-        echo "<a href='hello.php?login=".$_SESSION['login']."'>Report</a>";
+        echo "<p>Hello," . $_SESSION['login'] . "</p>";
+        echo "<a href='hello.php?login=" . $_SESSION['login'] . "'>Report</a>";
     }
     echo '<br><a href="logout.php" class="logout">logout</a>';
 }
@@ -130,5 +126,5 @@ if (isset($_POST['gosearch'])) {
     </div>
 </div>
 <!-- ***** Most Popular End ***** -->
-<?php           
-            include "footer.php";
+<?php
+include "footer.php";
