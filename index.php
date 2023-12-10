@@ -1,6 +1,6 @@
 <?php
 include "action.php";
-include "db.php";
+//include "db.php";
 include "header.php";
 
 $autorized = false;
@@ -32,6 +32,7 @@ $user_form = '<form action="' . $_SERVER['PHP_SELF'] . '" method="post" name="au
 echo '<div class="container authorized">';
 if (!isset($_SESSION['authorized'])) {
     echo $user_form;
+    echo "<a href='registration.php'>Sign up</a>";
 }
 else {
     if (isset($_SESSION['authorized'])) {

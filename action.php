@@ -28,6 +28,24 @@ function check_role($log, $pass)
     return check_autorize($log, $pass) ? $users[$log]['role'] : false;
 }
 
+function check_log($log){
+    $users = get_users();
+    return array_key_exists($log, $users);
+}
+
+function add_user($login, $password) {
+    $users = get_users();
+    if (check_log(login)) {
+        return false;
+    }
+    else {
+        $users[$login] = $password;
+        $_SESSION['authorized'] = 1;
+        $_SESSION['login'] = $login;
+        return true;
+    }
+}
+
 function name($a, $b)
 { // функция, определяющая способ сортировки (по названию столицы)
     if ($a["capital"] < $b["capital"]) {
