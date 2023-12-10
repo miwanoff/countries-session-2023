@@ -187,8 +187,13 @@ function update_users($users)
 
 function get_users()
 {
-    global $users;
-    return $users;
+    // global $users;
+    // return $users;
+    $filename = "db.txt";
+    $file = fopen($filename, "r");
+    $users = fread($file, filesize($filename) );
+    fclose($file);
+    return unserialize($users);
 }
 
 function test_input($data)
